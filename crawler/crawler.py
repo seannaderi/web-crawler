@@ -1,10 +1,18 @@
 from urllib.request import urlopen
 from bs4 import BeautifulSoup 
 
-url = 'http://www.google.com/'
+#generates soup object from a given url
+def generate_soup(url):
+    html = urlopen(url).read()
+    soup = BeautifulSoup(html, 'html.parser')
+    return soup
 
-html_stuff = urlopen(url).read()
 
-soup = BeautifulSoup(html_stuff, 'html.parser')
+def main():
+    url = 'http://www.google.com/'
+    soup = generate_soup(url)
+    print(soup.prettify())
 
-print(soup.prettify())
+
+if __name__ == '__main__':
+    main()
