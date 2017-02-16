@@ -3,9 +3,11 @@ import unittest
 class test_soup(unittest.TestCase):
     #set up for all of the soup test functions
     def setUp(self):
+        return
 
     #tear down for all of the soup test functions
     def tearDown(self):
+        return
 
     def test_1(self):
         pass
@@ -13,6 +15,15 @@ class test_soup(unittest.TestCase):
     def test_2(self):
         pass
 
+#creates the test suite, instantiating each instance to call a different
+#test method
+#def suite():
+#    tests = ['test_3', 'test_2']
+#    return unittest.TestSuite(map(test_soup, tests))
+
+if __name__ == '__main__':
+    unittest.main()
+	
 
 """
 Using the following asserts:
