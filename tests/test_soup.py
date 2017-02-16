@@ -1,4 +1,5 @@
 import unittest
+from .context import crawler
 
 class test_soup(unittest.TestCase):
     #set up for all of the soup test functions
