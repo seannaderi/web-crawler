@@ -1,21 +1,28 @@
 import unittest
-from .context import crawler
+import os
+from crawler import html_page
 
-class test_soup(unittest.TestCase):
+class html_page_tests(unittest.TestCase):
+
     #set up for all of the soup test functions
     def setUp(self):
-        return
+        current_dir = os.path.dirname(__file__)
+        filename = os.path.join(current_dir, 'mocks/four_links.html') 
+        with open(filename, 'r') as myfile:
+            self.html_string = myfile.read().replace('\n', '')
+        self.test_html_page = html_page.html_page(self.html_string)
 
     #tear down for all of the soup test functions
     def tearDown(self):
         return
 
-    def test_1(self):
-        pass
+    def test_html_class_parses_links(self):
+        self.assertTrue('/third_link.html' in self.test_html_page.html_links)
     
-    def test_2(self):
-        pass
-
+    def test_html_class_parses_static_assets(self):
+        self.assertTrue('/first_link.js' in self.test_html_page.static_assets['scripts'])
+        self.assertTrue('/second_link.css' in self.test_html_page.static_assets['css'])
+        self.assertTrue('/fourth_link.jpg' in self.test_html_page.static_assets['img'])
 #creates the test suite, instantiating each instance to call a different
 #test method
 #def suite():
