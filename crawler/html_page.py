@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
-from crawler import helpers
+from crawler.helpers import *
 
-class html_page:
+class Html_page:
 
     # page takes a url, and creates an html_page containing the static
     # assets and all of the links that can be follwed from that page
@@ -43,11 +43,10 @@ class html_page:
 
 def main():
     url = 'http://bbc.co.uk/news/'
-    my_html_page = html_page(get_html_as_string(url))
+    my_html_page = Html_page(get_html_as_string(url))
     print(my_html_page)
     print(my_html_page.html_links)
     # print(my_html_page.soup.prettify())
-
 
 if __name__ == '__main__':
     main()
