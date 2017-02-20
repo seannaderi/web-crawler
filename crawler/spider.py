@@ -1,38 +1,36 @@
-"""
-This file will contains all of the functions that perform the traversal of the
-domain
-"""
 from collections import deque
-from helpers import get_html_as_string
-from html_page import HTML_page
+from crawler.helpers import get_html_as_string, filter_visited_urls
+from crawler.html_page import HTML_page
 
 # To hold all of the html_page instances that we get from the traversal
 class spiders_web:
+    
+    # urls_visited and html_pages parameters used for testing purposes
+    def __init__(self, base_html_page, urls_visited, html_pages = None):
+        self.base_html_page = base_html_page 
+        # A set that tracks every url that we have visited to avoid looping
+        self.urls_visited = urls_visited
+        self.remaining_links = deque()
+        if html_pages:
+            self.html_pages = html_pages
+        else:
+            self.html_pages = set([base_html_page])
 
-    def __init__(self, base_url):
-        self.base_url = base_url
-        # Tracks every url that we have visited to avoid looping
-        self.urls_visited = set()
-        self.urls_visited.add(base_url)
-        self.html_pages = []
+    def loop(self, max_iterations = None):
+        while len(self.remaining_links) is not 0:
+            current_link = remaining_links.popleft()
+            html_string = get_html_as_string(current_link)
+            current_html_page = HTML_page(html_string)
+            self.urls_visited.add(current_link)
+            self.html_pages.add(current_html_page)
+            crawl(current_html_page)
 
-    def crawl(url, links = None):
-        if links == None:
-            links = deque()
-            links.append(normalise_html_links(url))
-
-        while len(links) is not 0:
-            current_url = links.popleft()
-            current_html_page = HTML_page(get_html_as_string(url))
-            # if this has been successful, then we can say that we visited this url
-            self.urls_visited.add(url)
-            # normalise the links for the current html_page
-            normalise_html_links(current_html_page.html_links) 
-            self.html_pages.append(current_html_page)
-            for link in current_html_page.html_links:
-                if link not in urls_visited:
-                    links.append(link)
-                    urls_visited.append(link)
+    # Can perform testing on the crawl function without needing to request
+    # html from a live site
+    def crawl(self, html_page):
+        to_visit = filter_visited_urls(self.urls_visited, html_page.html_links)
+        for link in to_visit:
+            self.remaining_links.append(link)
 
 def main():
     return
