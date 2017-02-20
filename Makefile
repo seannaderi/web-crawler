@@ -1,8 +1,8 @@
 install:
-	pip install -r requirements.txt
+	pip3 install -r requirements.txt
 
 test:
-	python3 -m 'nose'	
-	
+	nosetests tests
+
 clean:
-	find . -name '*.pyc' -delete
+	sudo find . -name '*.pyc' -delete
