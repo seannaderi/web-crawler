@@ -1,6 +1,7 @@
 import unittest
 import os
-from crawler import html_page
+import sys
+from crawler.html_page import HTML_page 
 
 class html_page_tests(unittest.TestCase):
     
@@ -10,7 +11,7 @@ class html_page_tests(unittest.TestCase):
         filename = os.path.join(current_dir, 'mocks/four_links.html') 
         with open(filename, 'r') as myfile:
             self.html_string = myfile.read().replace('\n', '')
-        self.test_html_page = html_page.html_page(self.html_string)
+        self.test_html_page = HTML_page(self.html_string)
 
     def tearDown(self):
         return

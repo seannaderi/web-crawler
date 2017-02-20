@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 from crawler.helpers import *
 
-class Html_page:
+class HTML_page:
 
     # page takes a url, and creates an html_page containing the static
     # assets and all of the links that can be follwed from that page
