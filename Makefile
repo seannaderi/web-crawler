@@ -6,3 +6,4 @@ test:
 
 clean:
 	sudo find . -name '*.pyc' -delete
+	sudo find . -name '__pycache__'  -delete 

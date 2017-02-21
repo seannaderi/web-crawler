@@ -32,6 +32,15 @@ class spiders_web:
         for link in to_visit:
             self.remaining_links.append(link)
 
+    '''
+    To go in the crawl function:
+    we need to normalise urls at some stage, when is this?
+    do a check to make sure we arent leaving the domain
+    do a check to make sure the request is http or https
+
+    All of this stuff can be tested if it's put in the crawl function
+    '''
+
 def main():
     return
 

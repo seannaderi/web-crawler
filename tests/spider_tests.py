@@ -25,6 +25,20 @@ class spider_tests(unittest.TestCase):
             self.test_spiders_web.urls_visited.add(link)
         self.test_spiders_web.crawl(self.test_base_html_page)
         self.assertTrue(len(self.test_spiders_web.remaining_links) == 0)
+
+    def test_crawl_adds_all_links_not_visited(self):
+        links = ['/second_link.html', '/fourth_link.html']
+        for link in links:
+            self.test_spiders_web.urls_visited.add(link)
+        self.test_spiders_web.crawl(self.test_base_html_page)
+        self.assertTrue('/first_link.html' in self.test_spiders_web.remaining_links)
+        self.assertTrue('/third_link.html' in self.test_spiders_web.remaining_links)
+
+    def test_crawl_doesnt_visit_different_domain(self):
+        pass
+
+    def test_crawl_only_visits_http(self):
+        pass
         
 if __name__ == '__main__':
     unittest.main()
