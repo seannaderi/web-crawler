@@ -11,7 +11,7 @@ class spider_tests(unittest.TestCase):
         filename = os.path.join(current_dir, 'mocks/spider_test.html')
         with open(filename, 'r') as myfile:
             self.html_string = myfile.read().replace('\n', '')
-        self.test_base_html_page = HTML_page(self.html_string)
+        self.test_base_html_page = HTML_page('www.test.com', self.html_string)
         self.test_urls_visited = set()
         self.test_spiders_web = spiders_web(self.test_base_html_page, self.test_urls_visited)
  

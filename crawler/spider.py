@@ -30,14 +30,18 @@ class spiders_web:
     def crawl(self, html_page):
         to_visit = self.perform_filtering(html_page.html_links)
         for link in to_visit:
-            self.remaining_links.append(link)
+            if link not in self.remaining_links:
+                self.remaining_links.append(link)
 
-    def perform_filtering(html_links):
+    def perform_filtering(self, html_links):
         to_visit = set()
         # add links to to_visit if they satisfy these criteria
         # 1 - must be same domain
         # 2 - must be http or https
         # 3 - must not be in urls_visited
+        not_yet_visited = filter_visited_urls(self.urls_visited, html_links) 
+        to_visit = not_yet_visited
+        return to_visit
 
 def main():
     return

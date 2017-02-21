@@ -4,10 +4,13 @@ from urllib.parse import urlparse, urljoin, urlsplit
 def get_html_as_string(url):
     return urlopen(url).read()
 
-# Performs normalisation of every url before we continue the traversal
-# This ensures that we know if we have visited this url before
-def normalise_html_links(html_links):
-    return 
+# Current_html_page_url should contain scheme as well as domain and potentially path 
+# html_links must be an iterable
+def normalise_html_links(current_html_page_url, html_links):
+    normalised_links = set()
+    for link in html_links:
+        normalised_links.add(urljoin(current_html_page_url, link)) 
+    return normalised_links
 
 # Returns only the urls we should visit
 def filter_visited_urls(visited_urls, current_urls):
@@ -23,13 +26,17 @@ def is_same_domain(domain, current_url):
 
 # Returns true if the url uses http or https
 def is_http(url):
-    return urlparse(url)[0] == 'http' or urlparse(url)[0] == 'https'
+    scheme = urlparse(url)[0]
+    return scheme == 'http' or scheme == 'https' or scheme == ''
+
+def remove_query_params(url):
+    return urljoin(url, urlparse(url).path)
 
 def main():
     domain = 'www.google.com'
     current_domain = '//www.google.com'
     test_url = 'httxp://www.google.com/'
-    print(is_same_domain(domain, current_domain))
+    print(normalise_html_links('https://www.google.com/why/why/why', ['https://www.what.com/']))
 
 if __name__ == '__main__':
     main()

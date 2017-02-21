@@ -1,12 +1,17 @@
 from bs4 import BeautifulSoup
-from crawler.helpers import normalise_html_links 
+try:
+    from crawler.helpers import * 
+except ImportError:
+    from helpers import * 
 
 class HTML_page:
 
     # page takes a url, and creates an html_page containing the static
     # assets and all of the links that can be follwed from that page
-    # in seperate sets
-    def __init__(self, html_string):
+    # in seperate set
+    def __init__(self, url, html_string):
+        self.url = url
+        #make sure that the url is in the correct format here....
         self.html_string = html_string
         self.soup = self.generate_soup(html_string) 
         # dict structure for static assets:
@@ -19,7 +24,7 @@ class HTML_page:
         self.populate_static_assets()
         self.html_links = set()
         self.populate_html_links()
-        normalise_html_links(self.html_links)
+        normalise_html_links(url, self.html_links)
     
     def generate_soup(self, html_string):
         return BeautifulSoup(html_string, 'html.parser')
@@ -44,7 +49,7 @@ class HTML_page:
 
 def main():
     url = 'http://bbc.co.uk/news/'
-    my_html_page = Html_page(get_html_as_string(url))
+    my_html_page = HTML_page(get_html_as_string(url))
     print(my_html_page)
     print(my_html_page.html_links)
     # print(my_html_page.soup.prettify())
