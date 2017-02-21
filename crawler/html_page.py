@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-from crawler.helpers import *
+from crawler.helpers import normalise_html_links 
 
 class HTML_page:
 
@@ -19,6 +19,7 @@ class HTML_page:
         self.populate_static_assets()
         self.html_links = set()
         self.populate_html_links()
+        normalise_html_links(self.html_links)
     
     def generate_soup(self, html_string):
         return BeautifulSoup(html_string, 'html.parser')

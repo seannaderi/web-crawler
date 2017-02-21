@@ -1,5 +1,5 @@
 from collections import deque
-from crawler.helpers import get_html_as_string, filter_visited_urls
+from crawler.helpers import *
 from crawler.html_page import HTML_page
 
 # To hold all of the html_page instances that we get from the traversal
@@ -28,18 +28,16 @@ class spiders_web:
     # Can perform testing on the crawl function without needing to request
     # html from a live site
     def crawl(self, html_page):
-        to_visit = filter_visited_urls(self.urls_visited, html_page.html_links)
+        to_visit = self.perform_filtering(html_page.html_links)
         for link in to_visit:
             self.remaining_links.append(link)
 
-    '''
-    To go in the crawl function:
-    we need to normalise urls at some stage, when is this?
-    do a check to make sure we arent leaving the domain
-    do a check to make sure the request is http or https
-
-    All of this stuff can be tested if it's put in the crawl function
-    '''
+    def perform_filtering(html_links):
+        to_visit = set()
+        # add links to to_visit if they satisfy these criteria
+        # 1 - must be same domain
+        # 2 - must be http or https
+        # 3 - must not be in urls_visited
 
 def main():
     return
