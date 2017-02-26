@@ -28,19 +28,21 @@ class spiders_web:
     # Can perform testing on the crawl function without needing to request
     # html from a live site
     def crawl(self, html_page):
-        to_visit = self.perform_filtering(html_page.html_links)
+        to_visit = self.perform_filtering(html_page)
         for link in to_visit:
             if link not in self.remaining_links:
                 self.remaining_links.append(link)
 
-    def perform_filtering(self, html_links):
+    def perform_filtering(self, html_page):
         to_visit = set()
         # add links to to_visit if they satisfy these criteria
-        # 1 - must be same domain
-        # 2 - must be http or https
+        # 1 - must be http or https
+        http = [link for link in html_page.html_links if is_http(link)]
+        # 2 - must be same domain
+        same_domain = [link for link in http if is_same_domain(html_page.domain, link)]
         # 3 - must not be in urls_visited
-        not_yet_visited = filter_visited_urls(self.urls_visited, html_links) 
-        to_visit = not_yet_visited
+        not_yet_visited = filter_visited_urls(self.urls_visited, same_domain) 
+        to_visit = set(not_yet_visited)
         return to_visit
 
 def main():

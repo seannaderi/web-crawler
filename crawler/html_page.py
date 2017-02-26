@@ -1,3 +1,4 @@
+from urllib.parse import urlparse
 from bs4 import BeautifulSoup
 try:
     from crawler.helpers import * 
@@ -11,6 +12,8 @@ class HTML_page:
     # in seperate set
     def __init__(self, url, html_string):
         self.url = url
+        #calculate domain of url
+        self.domain = '{uri.netloc}'.format(uri = urlparse(url))
         #make sure that the url is in the correct format here....
         self.html_string = html_string
         self.soup = self.generate_soup(html_string) 

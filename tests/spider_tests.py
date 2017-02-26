@@ -39,6 +39,9 @@ class spider_tests(unittest.TestCase):
 
     def test_crawl_only_visits_http(self):
         pass
+
+    def test_urls_are_properly_normalised(self):
+        pass
         
 if __name__ == '__main__':
     unittest.main()

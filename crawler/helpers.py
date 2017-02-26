@@ -21,7 +21,6 @@ def filter_visited_urls(visited_urls, current_urls):
 def is_same_domain(domain, current_url):
     parsed = urlparse(current_url)
     current_domain = '{uri.netloc}'.format(uri=parsed)
-    print(current_domain)
     return domain == current_domain 
 
 # Returns true if the url uses http or https
@@ -32,14 +31,14 @@ def is_http(url):
 def remove_query_params(url):
     return urljoin(url, urlparse(url).path)
 
-def main():
-    domain = 'www.google.com'
-    current_domain = '//www.google.com'
-    test_url = 'httxp://www.google.com/'
-    print(normalise_html_links('https://www.google.com/why/why/why', ['https://www.what.com/']))
-
-if __name__ == '__main__':
-    main()
+# def main():
+#     domain = 'www.google.com'
+#     current_domain = '//www.google.com'
+#     test_url = 'httxp://www.google.com/'
+#     print(normalise_html_links('https://www.google.com/why/why/why', ['https://www.what.com/'
+# 
+# if __name__ == '__main__':
+#     main()
 
 
 
