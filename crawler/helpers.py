@@ -31,14 +31,14 @@ def is_http(url):
 def remove_query_params(url):
     return urljoin(url, urlparse(url).path)
 
-# def main():
-#     domain = 'www.google.com'
-#     current_domain = '//www.google.com'
-#     test_url = 'httxp://www.google.com/'
-#     print(normalise_html_links('https://www.google.com/why/why/why', ['https://www.what.com/'
-# 
-# if __name__ == '__main__':
-#     main()
+def main():
+    domain = 'www.google.com'
+    test_url = 'www.different_domain.com'
+    print(is_same_domain(domain, test_url))
+#    print(normalise_html_links('https://www.google.com/why/why/why', ['https://www.what.com/'
+
+if __name__ == '__main__':
+    main()
 
 
 

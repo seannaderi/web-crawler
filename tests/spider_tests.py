@@ -35,7 +35,13 @@ class spider_tests(unittest.TestCase):
         self.assertTrue('/third_link.html' in self.test_spiders_web.remaining_links)
 
     def test_crawl_doesnt_visit_different_domain(self):
-        pass
+        links = ['http://www.different_domain.html', 'http://www.test.com/should_work']
+        new_html_page = HTML_page('//www.test.com', '')
+        for link in links:
+            new_html_page.html_links.add(link)
+        self.test_spiders_web.crawl(new_html_page)
+        self.assertTrue('http://www.test.com/should_work' in self.test_spiders_web.remaining_links)
+        self.assertFalse('http://www.different_domain.html' in self.test_spiders_web.remaining_links)
 
     def test_crawl_only_visits_http(self):
         pass

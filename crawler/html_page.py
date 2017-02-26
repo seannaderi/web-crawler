@@ -13,7 +13,8 @@ class HTML_page:
     def __init__(self, url, html_string):
         self.url = url
         #calculate domain of url
-        self.domain = '{uri.netloc}'.format(uri = urlparse(url))
+        parsed = urlparse(self.url)
+        self.domain = '{uri.netloc}'.format(uri = parsed) 
         #make sure that the url is in the correct format here....
         self.html_string = html_string
         self.soup = self.generate_soup(html_string) 
@@ -27,7 +28,7 @@ class HTML_page:
         self.populate_static_assets()
         self.html_links = set()
         self.populate_html_links()
-        normalise_html_links(url, self.html_links)
+        self.html_links = normalise_html_links(url, self.html_links)
     
     def generate_soup(self, html_string):
         return BeautifulSoup(html_string, 'html.parser')
